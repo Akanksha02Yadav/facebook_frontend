@@ -39,14 +39,12 @@ export default function RegisterForm({ setVisible }) {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
-  // console.log(user);
   const years = Array.from(new Array(108), (val, index) => bYear - index);
   const months = Array.from(new Array(12), (val, index) => 1 + index);
   const getDays = () => {
     return new Date(bYear, bMonth, 0).getDate();
   };
   const days = Array.from(new Array(getDays()), (val, index) => 1 + index);
-  // console.log(days);
   const registerValidation = Yup.object({
     first_name: Yup.string()
       .required("what's your first name ?")
@@ -78,7 +76,6 @@ export default function RegisterForm({ setVisible }) {
   const [loading, setLoading] = useState(false);
 
   const registerSubmit = async () => {
-    console.log(process.env.REACT_APP_BACKEND_URL);
     try {
       const { data } = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/register`,
