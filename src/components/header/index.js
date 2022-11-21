@@ -14,10 +14,13 @@ import {
   Watch,
 } from "../../svg";
 import { useSelector } from "react-redux";
+import SearchMenu from "./SearchMenu";
+import { useState } from "react";
 
 export default function Header() {
   const { user } = useSelector((user) => ({ ...user }));
-  console.log(user);
+  const [showSearchMenu, setShowSearchMenu] = useState(false);
+  // console.log(user);
   const color = "#65676b";
   return (
     <header>
@@ -27,7 +30,7 @@ export default function Header() {
             <Logo />
           </div>
         </Link>
-        <div className="search search1">
+        <div className="search search1" onClick={() => setShowSearchMenu(true)}>
           <Search color={color} />
           <input
             type="text"
@@ -36,6 +39,10 @@ export default function Header() {
           />
         </div>
       </div>
+      {showSearchMenu && (
+        <SearchMenu color={color} setShowSearchMenu={setShowSearchMenu} />
+      )}
+
       <div className="header_middle">
         <Link to="/" className="middle_icon active">
           <HomeActive />
@@ -59,18 +66,19 @@ export default function Header() {
           <img src={user?.picture} alt="" />
           <span>{user?.first_name}</span>
         </Link>
-        {/* <div className="circle_icon">
+        <div className="circle_icon hover1">
           <Menu />
         </div>
-        <div className="circle_icon">
+        <div className="circle_icon hover1">
           <Messenger />
         </div>
-        <div className="circle_icon">
+        <div className="circle_icon hover1">
           <Notifications />
+          <div className="right_notification">5</div>
         </div>
-        <div className="circle_icon">
+        <div className="circle_icon hover1">
           <ArrowDown />
-        </div> */}
+        </div>
       </div>
     </header>
   );
