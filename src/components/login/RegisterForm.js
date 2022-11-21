@@ -6,8 +6,13 @@ import DateOfBirthSelect from "./DateOfBirthSelect";
 import GenderSelect from "./GenderSelect";
 import DotLoader from "react-spinners/DotLoader";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm({ setVisible }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userInfos = {
     first_name: "",
     last_name: "",
@@ -73,7 +78,30 @@ export default function RegisterForm({ setVisible }) {
   const [loading, setLoading] = useState(false);
 
   const registerSubmit = async () => {
+    console.log(process.env.REACT_APP_BACKEND_URL);
     try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/register`,
+        {
+          first_name,
+          last_name,
+          email,
+          password,
+          bYear,
+          bMonth,
+          bDay,
+          gender,
+          username: email,
+        }
+      );
+      setError("");
+      setSuccess(data.message);
+      const { message, ...rest } = data;
+      setTimeout(() => {
+        dispatch({ type: "LOGIN", payload: rest });
+        Cookies.set("user", JSON.stringify(rest));
+        navigate("/");
+      }, 2000);
     } catch (error) {
       setLoading(false);
       setSuccess("");
