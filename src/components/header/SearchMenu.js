@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import { useRef } from "react";
 import useClickOutside from "../../helpers/clickOutside";
 import { Return, Search } from "../../svg";
@@ -10,6 +11,9 @@ export default function SearchMenu({ color, setShowSearchMenu }) {
   useClickOutside(menu, () => {
     setShowSearchMenu(false);
   });
+  useEffect(() => {
+    input.current.focus();
+  }, []);
   return (
     <div className="header_left search_area scrollbar" ref={menu}>
       <div className="search_wrap">
@@ -35,7 +39,7 @@ export default function SearchMenu({ color, setShowSearchMenu }) {
 
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Search Facebook"
             ref={input}
             onFocus={() => setIconVisible(false)}
             onBlur={() => setIconVisible(true)}
