@@ -1,13 +1,20 @@
 import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
+import * as Yup from "yup";
 import LoginInput from "../../components/inputs/logininput";
 import { useState } from "react";
-import * as Yup from "yup";
+import DotLoader from "react-spinners/DotLoader";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 const loginInfos = {
   email: "",
   password: "",
 };
 export default function LoginForm({ setVisible }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [login, setLogin] = useState(loginInfos);
   const { email, password } = login;
 
@@ -22,6 +29,28 @@ export default function LoginForm({ setVisible }) {
       .max(100),
     password: Yup.string().required("Password is required"),
   });
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const loginSubmit = async () => {
+    try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/login`,
+        {
+          email,
+          password,
+        }
+      );
+
+      dispatch({ type: "LOGIN", payload: data });
+      Cookies.set("user", JSON.stringify(data));
+      navigate("/");
+    } catch (error) {
+      setLoading(false);
+      setError(error.response.data.message);
+    }
+  };
   return (
     <div className="login_wrap">
       <div className="login_1">
@@ -39,6 +68,9 @@ export default function LoginForm({ setVisible }) {
               password,
             }}
             validationSchema={loginValidation}
+            onSubmit={() => {
+              loginSubmit();
+            }}
           >
             {(formik) => (
               <Form>

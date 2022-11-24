@@ -6,8 +6,13 @@ import DateOfBirthSelect from "./DateOfBirthSelect";
 import GenderSelect from "./GenderSelect";
 import DotLoader from "react-spinners/DotLoader";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm({ setVisible }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userInfos = {
     first_name: "",
     last_name: "",
@@ -34,14 +39,12 @@ export default function RegisterForm({ setVisible }) {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
-  // console.log(user);
   const years = Array.from(new Array(108), (val, index) => bYear - index);
   const months = Array.from(new Array(12), (val, index) => 1 + index);
   const getDays = () => {
     return new Date(bYear, bMonth, 0).getDate();
   };
   const days = Array.from(new Array(getDays()), (val, index) => 1 + index);
-  // console.log(days);
   const registerValidation = Yup.object({
     first_name: Yup.string()
       .required("what's your first name ?")
@@ -74,6 +77,28 @@ export default function RegisterForm({ setVisible }) {
 
   const registerSubmit = async () => {
     try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/register`,
+        {
+          first_name,
+          last_name,
+          email,
+          password,
+          bYear,
+          bMonth,
+          bDay,
+          gender,
+          username: email,
+        }
+      );
+      setError("");
+      setSuccess(data.message);
+      const { message, ...rest } = data;
+      setTimeout(() => {
+        dispatch({ type: "LOGIN", payload: rest });
+        Cookies.set("user", JSON.stringify(rest));
+        navigate("/");
+      }, 2000);
     } catch (error) {
       setLoading(false);
       setSuccess("");
