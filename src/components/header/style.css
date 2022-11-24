@@ -400,7 +400,7 @@ header {
 .mmenu_span1 {
   font-size: 14px !important;
 }
-.mmenu-span2 {
+.mmenu_span2 {
   font-size: 12px !important;
   color: var(--color-secondary);
 }
@@ -435,6 +435,134 @@ header {
   user-select: none;
   padding: 10px;
 }
+.absolute_wrap .mmenu_item {
 
-
+}
+.absolute_wrap_header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 24px;
+}
+.absolute_wrap label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 50px;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.absolute_wrap label input {
+  width: 20px;
+  height: 20px;
+}
 /*......user Menu........*/
+
+/*---responsive----------*/
+@media (max-width: 1295px) {
+  .middle_icon {
+    width: 90px;
+  }
+}
+@media (max-width: 1130px) {
+  .middle_icon {
+    width: 70px;
+  }
+}
+@media (max-width: 1040px) {
+  .search1 {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    justify-content: center;
+  }
+  .search1 input {
+    display: none;
+  }
+  .header_middle {
+    transform: translateX(-15%);
+  }
+}
+@media (max-width: 945px) {
+  .header_middle {
+    transform: translateX(-22%);
+  }
+}
+@media (max-width: 850px) {
+  .header_middle {
+    transform: translateX(-30%);
+  }
+  .middle_icon:nth-child(5) {
+    display: none;
+  }
+}
+@media (max-width: 770px) {
+  .header_middle {
+    transform: translateX(-37%);
+  }
+  .middle_icon:nth-child(4) {
+    display: none;
+  }
+}
+@media (max-width: 720px) {
+  .middle_icon:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .profile_link {
+    display: none;
+  }
+  .all_menu {
+    width: 485px;
+  }
+  .all_left {
+    width: 250px;
+  }
+}
+@media (max-width: 550px) {
+  .middle_icon:nth-child(1) {
+    display: none;
+  }
+  .header_middle {
+    transform: translateX(-20%);
+  }
+}
+@media (max-width: 505px) {
+  .all_menu {
+    width: 340px;
+    right: -9rem;
+  }
+  .all_menu_wrap {
+    grid-template-columns: 1fr;
+  }
+  .all_left {
+    width: 100%;
+  }
+  .all_right {
+    position: relative;
+    width: 100%;
+    padding-left: 3rem;
+    margin-bottom: 1rem;
+  }
+}
+@media (max-width: 400px) {
+  .header_right .circle_icon:nth-child(3) {
+    display: none;
+  }
+  .mmenu {
+    width: 290px;
+  }
+  .all_menu {
+    width: 310px;
+    left: -10rem;
+  }
+  .search_area {
+    width: 310px;
+  }
+}
+/*---responsive----------*/
