@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 import { ArrowDown1 } from "../../../svg";
 import { useState } from "react";
 import Shortcut from "./Shortcut";
-export default function LeftHome({ user }) {
+export default function LeftHome({ user: { first_name, last_name, picture } }) {
   const [visible, setVisible] = useState(false);
   return (
     <div className="left_home scrollbar">
       <Link to="/profile" className="left_link hover1">
-        <img src={user?.picture} alt="" />
+        <img src={picture} alt="" />
         <span>
-          {user?.first_name} {user?.last_name}
+          {first_name} {last_name}
         </span>
       </Link>
       {left.slice(0, 8).map((link, i) => (

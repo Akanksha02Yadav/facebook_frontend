@@ -4,17 +4,17 @@ import DisplayAccessibility from "./DisplayAccessibility";
 import HelpSupport from "./HelpSupport";
 import SettingsPrivacy from "./SettingsPrivacy";
 
-export default function UserMenu({ user }) {
+export default function UserMenu({ user: { first_name, last_name, picture } }) {
   const [visible, setVisible] = useState(0);
   return (
     <div className="mmenu">
       {visible === 0 && (
         <div>
           <Link to="/profile" className="mmenu_header hover3">
-            <img src={user?.picture} alt="" />
+            <img src={picture} alt="" />
             <div className="mmenu_col">
               <span>
-                {user?.first_name} {user?.last_name}
+                {first_name} {last_name}
               </span>
               <span>See your profile</span>
             </div>

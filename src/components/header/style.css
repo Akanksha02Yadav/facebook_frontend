@@ -5,13 +5,12 @@ header {
     z-index: 99;
     background: var(--bg-primary);
     width: 100%;
-    box-shadow: 1px 8px 15px -7px var(--shadow-2);
+    box-shadow: 1px 8px 15px var(--shadow-2);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     color: var(--color-primary);
     user-select: none;
 }
-/* top 0 chnages to 4px */
 /*............HEADER LEFT............*/
 .header_left {
     display: flex;

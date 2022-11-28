@@ -1,0 +1,11 @@
+.createPost {
+    background: var(--bg-primary);
+}
+.createPost_header {
+
+}
+
+.createPost_header img {
+    width: 100px;
+    /* height: 100px; */
+}
