@@ -88,7 +88,6 @@ export default function RegisterForm({ setVisible }) {
           bMonth,
           bDay,
           gender,
-          username: email,
         }
       );
       setError("");
