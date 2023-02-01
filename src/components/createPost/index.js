@@ -1,12 +1,20 @@
 import "./style.css";
 import { Feeling, LiveVideo, Photo } from "../../svg";
-export default function CreatePost({ user: { picture, first_name } }) {
+export default function CreatePost({
+  user: { picture, first_name },
+  setVisible,
+}) {
   return (
     <div className="createPost">
       <div className="createPost_header">
         <img src={picture} alt="" />
-        <div className="open_post hover2">
-          What's in your mind , {first_name}
+        <div
+          className="open_post hover2"
+          onClick={() => {
+            setVisible(true);
+          }}
+        >
+          What's in your mind,{first_name}
         </div>
       </div>
       <div className="create_splitter"></div>
